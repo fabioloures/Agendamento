@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agendamento.reposit.Migrations
 {
     [DbContext(typeof(SalaContext))]
-    [Migration("20200728215815_inicial")]
+    [Migration("20200729190415_inicial")]
     partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
