@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Agendamento.Models
+namespace Agendamento.Dominio
 {
     public class Sala
     {

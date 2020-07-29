@@ -1,16 +1,14 @@
-﻿using Agendamento.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Agendamento.Data
+namespace Agendamento.Repositorio
 {
-    public class SalaContext: DbContext
+    public class SalaContext : DbContext
     {
         public DbSet<Sala> Salas { get; set; }
         public DbSet<Evento> Eventos { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,5 +19,8 @@ namespace Agendamento.Data
             //optionsBuilder.UseSqlServer("Password=master;Persist Security Info=True;User ID=sa;Initial Catalog=AgendamentoApp;Data Source=DESKTOP-C54G0EB");
         }
 
+
     }
+
+
 }

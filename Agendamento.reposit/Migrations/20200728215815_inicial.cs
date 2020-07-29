@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Agendamento.Migrations
+namespace Agendamento.reposit.Migrations
 {
     public partial class inicial : Migration
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 
 
-namespace Agendamento.Models
+namespace Agendamento.Dominio
 {
     public class Evento
     {
