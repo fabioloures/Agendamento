@@ -74,7 +74,6 @@ namespace Agendamento.Controllers
                     _context.Salas.Update(sala);  //update
                     _context.SaveChanges();
                     return Created("api/sala", sala);
-
                 }
                 else {
                     _context.Salas.Add(sala);  //insert
