@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agendamento.reposit.Migrations
 {
     [DbContext(typeof(SalaContext))]
-    [Migration("20200729190415_inicial")]
-    partial class inicial
+    [Migration("20200731121705_inicio")]
+    partial class inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,7 +27,9 @@ namespace Agendamento.reposit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Salaid");
+                    b.Property<string>("SalaNome");
+
+                    b.Property<int?>("Salaid");
 
                     b.Property<DateTime>("data_final");
 
@@ -59,8 +61,7 @@ namespace Agendamento.reposit.Migrations
                 {
                     b.HasOne("Agendamento.Dominio.Sala", "Sala")
                         .WithMany()
-                        .HasForeignKey("Salaid")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Salaid");
                 });
 #pragma warning restore 612, 618
         }

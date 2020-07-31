@@ -14,7 +14,8 @@ namespace Agendamento.Dominio
         public string nome_resp { get; set; }
 
         public Sala Sala { get; set; }
-        public int Salaid { get; set; }
+        //public int Salaid { get; set; }
+        public string SalaNome { get; set; }
         public DateTime data_inicial { get; set; }
         public DateTime data_final { get; set; }
 

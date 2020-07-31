@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Agendamento.Dominio;
 using Agendamento.reposit;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -23,10 +24,9 @@ namespace Agendamento.Controllers
 
         
         // GET: api/<SalaController>
-        [HttpGet]  // http://localhost:52024/api/Sala
+        [HttpGet]  // http://localhost:52024/api/Sala        
         public ActionResult Get()
-        {
-            
+        {            
             try
             {
                 SalaContext _context1 = _context;
@@ -36,8 +36,6 @@ namespace Agendamento.Controllers
             {
                 return BadRequest($"Erro : {ex}");
             }
-
-
         }
 
         // GET api/<SalaController>/5

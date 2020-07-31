@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Net.Http.Headers;
 
 namespace Agendamento
 {
@@ -19,6 +20,7 @@ namespace Agendamento
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -33,9 +35,24 @@ namespace Agendamento
                 
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConcection"));
                 //options.UseSqlServer(@connectionString);
-            }); 
+            });
 
+            //ConfigureServices ADD ERRO DE POST
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "CorsPolicy",
+                    builder => builder.WithOrigins("http://localhost:4200")
+                                      .WithHeaders(HeaderNames.ContentType, "application/json")
+                                      .WithMethods("PUT", "DELETE", "GET", "OPTIONS", "POST")
+                    );
+            });
+
+            services.AddCors(); // ADD Make sure you call this previous to AddMvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +63,35 @@ namespace Agendamento
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors( // ADD
+        options => options.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+
+            app.UseHttpsRedirection();
+
+
+
+            //app.UseCors(
+            //options => options.WithOrigins("http://localhost:4200", "https://localhost:4200")
+            //                .AllowAnyHeader().AllowAnyMethod().AllowCredentials()
+            //            );
+            //FIM Configure ADD
+
+
+
             app.UseMvc();
+
+
+
+
+
         }
+
+
+
+
+
+
+
+
     }
 }

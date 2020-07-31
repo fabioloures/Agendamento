@@ -42,12 +42,31 @@ namespace Agendamento.Controllers
         }
 
         // GET api/<EventoController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        /*[HttpGet("{id}")]
+        public string Gettid(int id)
         {
-            return "value";
+            var evento = _context.Eventos
+               .Where(x => x.id == id)
+                .ToList();
+
+        }*/
+
+        //http://localhost:52024/api/evento/filtro/10
+        [HttpGet("filtro/{id}")]
+        public async Task<ActionResult<Evento>> GetEventos(int id)
+        {
+            var eventos = await _context.Eventos.FindAsync(id);
+
+            if (eventos == null)
+            {
+                return NotFound();
+            }
+
+            return eventos;
         }
 
+
+        // atualizar e inserir no mesmo metodo post
         [HttpPost] //http://localhost:52024/api/Evento
                    //{ "nome":"sala 3"}
         public ActionResult Post([FromBody] Evento evento)
@@ -83,6 +102,7 @@ namespace Agendamento.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+
         }
 
 
@@ -107,11 +127,56 @@ namespace Agendamento.Controllers
         }
 
 
+        //http://localhost:52024/api/evento/delete/10
+        [HttpGet("delete/{id}")]
+        public async Task<ActionResult<Evento>> GetDelete(int id)
+        {
+            var eventos = await _context.Eventos.FindAsync(id);
+
+            if (eventos == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var sala = _context.Eventos
+                        .Where(h => h.id == id)
+                        .FirstOrDefault();
+                
+                _context.Eventos.Remove(sala);
+                _context.SaveChanges();
+                
+            }
+
+            return eventos;
+        }
+
+
 
         // DELETE api/<EventoController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
         }
+
+        // teste validação de data ja existe -> //  http://localhost:52024/api/evento/filtrodata/2020-03-01
+        //A única regra de negócio é validar se já existe um evento para a
+        //data selecionada e neste caso, não permitir o cadastro.
+        [HttpGet("filtrodata/{data}")]
+        public async Task<ActionResult<Evento>> GetData(DateTime data)
+        {
+            var eventos = _context.Eventos
+                       .Where(h => h.data_inicial == data)
+                       .FirstOrDefault();
+
+            if (eventos == null)
+            {
+                return NotFound();
+            }
+
+            return eventos;
+        }
+
+
     }
 }

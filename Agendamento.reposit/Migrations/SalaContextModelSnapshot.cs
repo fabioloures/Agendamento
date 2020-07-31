@@ -25,7 +25,9 @@ namespace Agendamento.reposit.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Salaid");
+                    b.Property<string>("SalaNome");
+
+                    b.Property<int?>("Salaid");
 
                     b.Property<DateTime>("data_final");
 
@@ -57,8 +59,7 @@ namespace Agendamento.reposit.Migrations
                 {
                     b.HasOne("Agendamento.Dominio.Sala", "Sala")
                         .WithMany()
-                        .HasForeignKey("Salaid")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("Salaid");
                 });
 #pragma warning restore 612, 618
         }

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Agendamento.reposit.Migrations
 {
-    public partial class inicial : Migration
+    public partial class inicio : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,8 @@ namespace Agendamento.reposit.Migrations
                     id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     nome_resp = table.Column<string>(nullable: true),
-                    Salaid = table.Column<int>(nullable: false),
+                    Salaid = table.Column<int>(nullable: true),
+                    SalaNome = table.Column<string>(nullable: true),
                     data_inicial = table.Column<DateTime>(nullable: false),
                     data_final = table.Column<DateTime>(nullable: false)
                 },
@@ -40,7 +41,7 @@ namespace Agendamento.reposit.Migrations
                         column: x => x.Salaid,
                         principalTable: "Salas",
                         principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
